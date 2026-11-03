@@ -1,6 +1,6 @@
 #!/bin/bash
 # Install a packaged LightFox build for the current user. Needs no root.
-# Usage: lightfox/install.sh [path/to/lightfox-*.tar.*]
+# Usage: lightfox/install.sh [path/to/package.tar.*]
 set -euo pipefail
 
 src_dir="$(cd "$(dirname "$0")/.." && pwd)"
@@ -8,16 +8,27 @@ tarball="${1:-$(ls -t "$src_dir"/obj-lightfox/dist/lightfox-*.tar.* | head -1)}"
 prefix="$HOME/.local/opt"
 target="$prefix/lightfox"
 staging="$prefix/.lightfox-new"
+profile="$HOME/.local/share/lightfox/profile"
+launcher="$HOME/.local/bin/lightfox"
 
-mkdir -p "$prefix" "$HOME/.local/bin" "$HOME/.local/share/applications"
+mkdir -p "$prefix" "$HOME/.local/bin" "$HOME/.local/share/applications" "$profile"
 rm -rf "$staging"
 mkdir -p "$staging"
 tar -xf "$tarball" -C "$staging" --strip-components=1
-test -x "$staging/lightfox"
+
+binary=lightfox
+test -x "$staging/$binary" || binary=firefox
+test -x "$staging/$binary"
 
 rm -rf "$target"
 mv "$staging" "$target"
-ln -sfn "$target/lightfox" "$HOME/.local/bin/lightfox"
+
+rm -f "$launcher"
+cat > "$launcher" <<EOF
+#!/bin/sh
+exec "$target/$binary" --class lightfox --name lightfox --profile "$profile" "\$@"
+EOF
+chmod +x "$launcher"
 
 for size in 16 22 24 32 48 64 128 256; do
   dir="$HOME/.local/share/icons/hicolor/${size}x${size}/apps"
@@ -31,7 +42,7 @@ Type=Application
 Name=LightFox
 GenericName=Web Browser
 Comment=Firefox without the extras
-Exec=$target/lightfox %u
+Exec=$launcher %u
 Icon=lightfox
 Terminal=false
 StartupWMClass=lightfox
@@ -41,11 +52,11 @@ Actions=new-window;new-private-window;
 
 [Desktop Action new-window]
 Name=New Window
-Exec=$target/lightfox --new-window %u
+Exec=$launcher --new-window %u
 
 [Desktop Action new-private-window]
 Name=New Private Window
-Exec=$target/lightfox --private-window %u
+Exec=$launcher --private-window %u
 EOF
 
 command -v update-desktop-database >/dev/null && update-desktop-database "$HOME/.local/share/applications" || true
