@@ -5018,13 +5018,6 @@ var ConfirmationHint = {
     MozXULElement.insertFTLIfNeeded("browser/confirmationHints.ftl");
 
     // IP Protection strings are still in preview (see Bug 2011776).
-    // Only insert the preview file if we're showing a hint for IP Protection.
-    if (
-      messageId === "confirmation-hint-ipprotection-navigated-to-excluded-site"
-    ) {
-      MozXULElement.insertFTLIfNeeded("browser/ipProtection.ftl");
-    }
-
     document.l10n.setAttributes(this._message, messageId, l10nArgs);
     if (descriptionId) {
       document.l10n.setAttributes(this._description, descriptionId);
@@ -5130,145 +5123,9 @@ var ConfirmationHint = {
 
 var FirefoxViewHandler = {
   tab: null,
-  BUTTON_ID: "firefox-view-button",
-  get button() {
-    return document.getElementById(this.BUTTON_ID);
-  },
-  init() {
-    CustomizableUI.addListener(this);
-
-    ChromeUtils.defineESModuleGetters(this, {
-      SyncedTabs: "resource://services-sync/SyncedTabs.sys.mjs",
-    });
-  },
-  uninit() {
-    CustomizableUI.removeListener(this);
-  },
-  onWidgetRemoved(aWidgetId) {
-    if (aWidgetId == this.BUTTON_ID && this.tab) {
-      gBrowser.removeTab(this.tab);
-    }
-  },
-  onWidgetAdded(aWidgetId) {
-    if (aWidgetId === this.BUTTON_ID) {
-      this.button.removeAttribute("open");
-    }
-  },
-  openTab(section) {
-    let viewURL = "about:firefoxview";
-    if (section) {
-      viewURL = `${viewURL}#${section}`;
-    }
-    // Need to account for navigation to Firefox View pages, but keep a tab
-    // that hasn't committed its first load yet, e.g. when a click follows the
-    // mousedown that opened it.
-    if (
-      this.tab &&
-      !this.tab.linkedBrowser.browsingContext.currentWindowGlobal
-        .isInitialDocument &&
-      this.tab.linkedBrowser.currentURI.spec.split("#")[0] != viewURL
-    ) {
-      gBrowser.removeTab(this.tab);
-      this.tab = null;
-    }
-    if (!this.tab) {
-      this.tab = gBrowser.addTrustedTab(viewURL);
-      this.tab.addEventListener("TabClose", this, { once: true });
-      gBrowser.tabContainer.addEventListener("TabSelect", this);
-      window.addEventListener("activate", this);
-      gBrowser.hideTab(this.tab);
-      this.button?.setAttribute("aria-controls", this.tab.linkedPanel);
-    }
-    // we put this here to avoid a race condition that would occur
-    // if this was called in response to "TabSelect"
-    this._closeDeviceConnectedTab();
-    gBrowser.selectedTab = this.tab;
-  },
-  openToolbarMouseEvent(event, section) {
-    if (event?.type == "mousedown" && event?.button != 0) {
-      return;
-    }
-    this.openTab(section);
-  },
-  handleEvent(e) {
-    switch (e.type) {
-      case "TabSelect": {
-        const selected = e.target == this.tab;
-        this.button?.toggleAttribute("open", selected);
-        this.button?.setAttribute("aria-pressed", selected);
-        this._recordViewIfTabSelected();
-        this._onTabForegrounded();
-        // If Fx View is opened, add temporary style to make first available tab focusable
-        // When Fx View is closed, remove temporary -moz-user-focus style from first available tab
-        gBrowser.visibleTabs[0].style.MozUserFocus =
-          e.target == this.tab ? "normal" : "";
-        break;
-      }
-      case "TabClose":
-        this.tab = null;
-        gBrowser.tabContainer.removeEventListener("TabSelect", this);
-        this.button?.removeAttribute("aria-controls");
-        break;
-      case "activate":
-        this._onTabForegrounded();
-        break;
-    }
-  },
-  _closeDeviceConnectedTab() {
-    if (!TabsSetupFlowManager.didFxaTabOpen) {
-      return;
-    }
-    // close the tab left behind after a user pairs a device and
-    // is redirected back to the Firefox View tab
-    const fxaRoot = Services.prefs.getCharPref(
-      "identity.fxaccounts.remote.root"
-    );
-    const fxDeviceConnectedTab = gBrowser.tabs.find(tab =>
-      tab.linkedBrowser.currentURI.displaySpec.startsWith(
-        `${fxaRoot}pair/auth/complete`
-      )
-    );
-
-    if (!fxDeviceConnectedTab) {
-      return;
-    }
-
-    if (gBrowser.tabs.length <= 2) {
-      // if its the only tab besides the Firefox View tab,
-      // open a new tab first so the browser doesn't close
-      gBrowser.addTrustedTab("about:newtab");
-    }
-    gBrowser.removeTab(fxDeviceConnectedTab);
-    TabsSetupFlowManager.didFxaTabOpen = false;
-  },
-  _onTabForegrounded() {
-    if (this.tab?.selected) {
-      this.SyncedTabs.syncTabs();
-    }
-  },
-  _recordViewIfTabSelected() {
-    if (this.tab?.selected) {
-      const PREF_NAME = "browser.firefox-view.button-clicks";
-      const MAX_DAYS_COUNT = 30 * 24 * 60 * 60 * 1000;
-      let buttonClicksData = JSON.parse(
-        Services.prefs.getStringPref(
-          PREF_NAME,
-          '{"count":0,"lastCountTime":""}'
-        )
-      );
-      let { count, lastCountTime } = buttonClicksData;
-      // Record telemetry
-      Glean.firefoxviewNext.tabSelectedToolbarbutton.record();
-
-      if (Math.round(Date.now()) - lastCountTime >= MAX_DAYS_COUNT) {
-        // reset count every 30 days
-        count = 0;
-      } else {
-        count++;
-      }
-      buttonClicksData.lastCountTime = Math.round(Date.now());
-      buttonClicksData.count = count;
-      Services.prefs.setStringPref(PREF_NAME, JSON.stringify(buttonClicksData));
-    }
-  },
+  button: null,
+  init() {},
+  uninit() {},
+  openTab() {},
+  openToolbarMouseEvent() {},
 };

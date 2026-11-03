@@ -22,12 +22,6 @@
       "moz-src:///browser/components/aiwindow/ui/modules/AIWindow.sys.mjs",
   });
 
-  ChromeUtils.importESModule(
-    "chrome://browser/content/genai/content/model-optin.mjs",
-    {
-      global: "current",
-    }
-  );
 
   class MozTabbrowserTabGroupMenu extends MozXULElement {
     static COLORS = [

@@ -145,14 +145,6 @@
     "scopes": ["addon_parent"],
     "paths": [["sessions"]]
   },
-  "sidebarAction": {
-    "url": "chrome://browser/content/parent/ext-sidebarAction.js",
-    "schema": "chrome://browser/content/schemas/sidebar_action.json",
-    "scopes": ["addon_parent"],
-    "events": ["uninstall"],
-    "manifest": ["sidebar_action"],
-    "paths": [["sidebarAction"]]
-  },
   "tabGroups": {
     "url": "chrome://browser/content/parent/ext-tabGroups.js",
     "schema": "chrome://browser/content/schemas/tabGroups.json",

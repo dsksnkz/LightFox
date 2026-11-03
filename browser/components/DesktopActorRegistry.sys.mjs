@@ -231,96 +231,9 @@ let JSWINDOWACTORS = {
     enablePreference: "browser.aboutwelcome.enabled",
   },
 
-  AIChatContent: {
-    parent: {
-      esModuleURI:
-        "moz-src:///browser/components/aiwindow/ui/actors/AIChatContentParent.sys.mjs",
-    },
-    child: {
-      esModuleURI:
-        "moz-src:///browser/components/aiwindow/ui/actors/AIChatContentChild.sys.mjs",
-      events: {
-        "AIChatContent:DispatchFollowUp": { wantUntrusted: true },
-        "AIChatContent:Ready": { wantUntrusted: true },
-        "AIChatContent:DispatchAction": { wantUntrusted: true },
-        "AIChatContent:OpenLink": { wantUntrusted: true },
-        "AIChatContent:DispatchNewChat": { wantUntrusted: true },
-        "AIChatContent:AccountSignIn": { wantUntrusted: true },
-        "AIChatContent:ToolUIUpdate": { wantUntrusted: true },
-        "AIChatContent:RequestAssets": { wantUntrusted: true },
-        "AIChatContent:HistoryGridRender": { wantUntrusted: true },
-        "AIChatContent:HistoryGridItemClick": { wantUntrusted: true },
-        "AIChatContent:ClientError": { wantUntrusted: true },
-      },
-    },
-    allFrames: true,
-    matches: ["about:aichatcontent"],
-    remoteTypes: ["privilegedabout"],
-    enablePreference: "browser.smartwindow.enabled",
-  },
 
-  AISmartBar: {
-    parent: {
-      esModuleURI:
-        "moz-src:///browser/components/aiwindow/ui/actors/AISmartBarParent.sys.mjs",
-    },
-    child: {
-      esModuleURI:
-        "moz-src:///browser/components/aiwindow/ui/actors/AISmartBarChild.sys.mjs",
-    },
-    matches: ["chrome://browser/content/aiwindow/aiWindow.html"],
-    includeChrome: true,
-    allFrames: true,
-    enablePreference: "browser.smartwindow.enabled",
-    remoteTypes: ["parent"],
-  },
 
-  AITab: {
-    parent: {
-      esModuleURI:
-        "moz-src:///browser/components/aiwindow/ui/actors/AITabParent.sys.mjs",
-    },
-    child: {
-      esModuleURI:
-        "moz-src:///browser/components/aiwindow/ui/actors/AITabChild.sys.mjs",
-      events: {
-        "AITab:GetPage": { wantUntrusted: true },
-        "AITab:DeletePage": { wantUntrusted: true },
-        "AITab:OpenLink": { wantUntrusted: true },
-      },
-    },
-    matches: ["about:smartpage", "about:smartpage?*"],
-    remoteTypes: ["privilegedabout"],
-    enablePreference: "browser.smartwindow.aitab.enabled",
-  },
 
-  SmartWindowTasks: {
-    parent: {
-      esModuleURI:
-        "moz-src:///browser/components/aiwindow/ui/actors/SmartWindowTasksParent.sys.mjs",
-    },
-    child: {
-      esModuleURI:
-        "moz-src:///browser/components/aiwindow/ui/actors/SmartWindowTasksChild.sys.mjs",
-      events: {
-        "SmartWindowTasks:RequestListMonitors": { wantUntrusted: true },
-        "SmartWindowTasks:RequestCreateMonitor": { wantUntrusted: true },
-        "SmartWindowTasks:RequestDeleteMonitor": { wantUntrusted: true },
-        "SmartWindowTasks:RequestUpdateMonitor": { wantUntrusted: true },
-        "SmartWindowTasks:RequestRunMonitor": { wantUntrusted: true },
-        "SmartWindowTasks:RequestPauseMonitor": { wantUntrusted: true },
-        "SmartWindowTasks:RequestConstants": { wantUntrusted: true },
-        "SmartWindowTasks:RequestOpenUrl": { wantUntrusted: true },
-      },
-    },
-    allFrames: true,
-    // TODO: Remove chrome:// URL and "parent" remoteType before landing
-    // These are only for development while about:smartwindowtasks registration lands
-    matches: ["about:smartwindowtasks"],
-    includeChrome: true,
-    remoteTypes: ["privilegedabout"],
-    enablePreference: "browser.smartwindow.enabled",
-  },
 
   BackupUI: {
     parent: {
@@ -596,62 +509,6 @@ let JSWINDOWACTORS = {
     safeForUntrustedWebProcess: true,
   },
 
-  GenAI: {
-    parent: {
-      esModuleURI: "moz-src:///browser/components/genai/GenAIParent.sys.mjs",
-    },
-    child: {
-      esModuleURI: "moz-src:///browser/components/genai/GenAIChild.sys.mjs",
-      events: {
-        mousedown: {},
-        mouseup: {},
-      },
-    },
-    allFrames: true,
-    onAddActor(register, unregister) {
-      let isRegistered = false;
-
-      // Register the actor if an external chat provider is set, page summarization is enabled, shortcuts are enabled, or the selection menu is enabled.
-      const maybeRegister = () => {
-        if (
-          Services.prefs.getCharPref("browser.ml.chat.provider", "") ||
-          Services.prefs.getBoolPref("browser.ml.chat.page") ||
-          Services.prefs.getBoolPref("browser.ml.chat.shortcuts") ||
-          Services.prefs.getBoolPref("browser.ml.chat.shortcuts.smartwindow") ||
-          (Services.prefs.getBoolPref(
-            "browser.highlightToSearch.featureGate"
-          ) &&
-            Services.prefs.getBoolPref("browser.highlightToSearch.enabled"))
-        ) {
-          if (!isRegistered) {
-            register();
-            isRegistered = true;
-          }
-        } else if (isRegistered) {
-          unregister();
-          isRegistered = false;
-        }
-      };
-
-      Services.prefs.addObserver("browser.ml.chat.page", maybeRegister);
-      Services.prefs.addObserver("browser.ml.chat.provider", maybeRegister);
-      Services.prefs.addObserver("browser.ml.chat.shortcuts", maybeRegister);
-      Services.prefs.addObserver(
-        "browser.ml.chat.shortcuts.smartwindow",
-        maybeRegister
-      );
-      Services.prefs.addObserver(
-        "browser.highlightToSearch.featureGate",
-        maybeRegister
-      );
-      Services.prefs.addObserver(
-        "browser.highlightToSearch.enabled",
-        maybeRegister
-      );
-      maybeRegister();
-    },
-    safeForUntrustedWebProcess: true,
-  },
 
   LightweightTheme: {
     child: {
@@ -671,12 +528,6 @@ let JSWINDOWACTORS = {
       "chrome://browser/content/syncedtabs/sidebar.html",
       "chrome://browser/content/places/historySidebar.xhtml",
       "chrome://browser/content/places/bookmarksSidebar.xhtml",
-      "chrome://browser/content/sidebar/sidebar-bookmarks.html",
-      "chrome://browser/content/sidebar/sidebar-history.html",
-      "chrome://browser/content/sidebar/sidebar-customize.html",
-      "chrome://browser/content/sidebar/sidebar-syncedtabs.html",
-      "chrome://browser/content/sidebar/sidebar-opentabs.html",
-      "chrome://browser/content/genai/chat.html",
       "about:firefoxview",
       "about:editprofile",
       "about:deleteprofile",
@@ -708,33 +559,7 @@ let JSWINDOWACTORS = {
     safeForUntrustedWebProcess: true,
   },
 
-  LinkPreview: {
-    parent: {
-      esModuleURI:
-        "moz-src:///browser/components/genai/LinkPreviewParent.sys.mjs",
-    },
-    child: {
-      esModuleURI:
-        "moz-src:///browser/components/genai/LinkPreviewChild.sys.mjs",
-    },
-    includeChrome: true,
-    enablePreference: "browser.ml.linkPreview.enabled",
-    safeForUntrustedWebProcess: true,
-  },
 
-  PageAssist: {
-    parent: {
-      esModuleURI:
-        "moz-src:///browser/components/genai/PageAssistParent.sys.mjs",
-    },
-    child: {
-      esModuleURI:
-        "moz-src:///browser/components/genai/PageAssistChild.sys.mjs",
-    },
-    includeChrome: true,
-    enablePreference: "browser.ml.pageAssist.enabled",
-    safeForUntrustedWebProcess: true,
-  },
 
   PageInfo: {
     child: {
@@ -944,74 +769,7 @@ let JSWINDOWACTORS = {
     safeForUntrustedWebProcess: true,
   },
 
-  SmartFormFill: {
-    parent: {
-      esModuleURI:
-        "moz-src:///browser/components/aiwindow/ui/actors/SmartFormFillParent.sys.mjs",
-    },
-    child: {
-      esModuleURI:
-        "moz-src:///browser/components/aiwindow/ui/actors/SmartFormFillChild.sys.mjs",
-      events: {
-        DOMContentLoaded: {},
-      },
-    },
-    safeForUntrustedWebProcess: true,
 
-    // SmartFormFill should only work on HTTPS urls
-    matches: ["https://*/*"],
-    messageManagerGroups: ["browsers"],
-
-    onAddActor(register, unregister) {
-      let isRegistered = false;
-
-      const maybeRegister = () => {
-        if (
-          Services.prefs.getBoolPref("browser.smartwindow.enabled") &&
-          Services.prefs.getBoolPref(
-            "browser.smartwindow.smartformfill.enabled",
-            false
-          )
-        ) {
-          if (!isRegistered) {
-            register();
-            isRegistered = true;
-          }
-        } else if (isRegistered) {
-          unregister();
-          isRegistered = false;
-        }
-      };
-
-      Services.prefs.addObserver("browser.smartwindow.enabled", maybeRegister);
-      Services.prefs.addObserver(
-        "browser.smartwindow.smartformfill.enabled",
-        maybeRegister
-      );
-      maybeRegister();
-    },
-  },
-
-  SmartFormFillReview: {
-    parent: {
-      esModuleURI:
-        "moz-src:///browser/components/aiwindow/ui/actors/SmartFormFillReviewParent.sys.mjs",
-    },
-    child: {
-      esModuleURI:
-        "moz-src:///browser/components/aiwindow/ui/actors/SmartFormFillReviewChild.sys.mjs",
-      events: {
-        "SmartFormFillReview:Ready": { wantUntrusted: true },
-        "fill-form": { wantUntrusted: true },
-        cancel: { wantUntrusted: true },
-        stop: { wantUntrusted: true },
-        close: { wantUntrusted: true },
-      },
-    },
-    matches: ["about:smartformfillreview"],
-    remoteTypes: ["privilegedabout"],
-    enablePreference: "browser.smartwindow.smartformfill.enabled",
-  },
 
   SpeechDispatcher: {
     parent: {

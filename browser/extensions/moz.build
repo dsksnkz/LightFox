@@ -4,7 +4,6 @@
 
 DIRS += [
     "formautofill",
-    "ipp-activator",
     "webcompat",
     "pictureinpicture",
     "search-detection",

@@ -228,7 +228,6 @@ XPCOMUtils.defineLazyPreferenceGetter(
     );
     if (!navbarPlacements.includes("sidebar-button")) {
       CustomizableUI.addWidgetToArea(
-        "sidebar-button",
         CustomizableUI.AREA_NAVBAR,
         Services.prefs.getBoolPref(kPrefSidebarPositionStartEnabled, true)
           ? 0
@@ -371,7 +370,6 @@ var CustomizableUIInternal = {
       "spring",
       "downloads-button",
       AppConstants.MOZ_DEV_EDITION ? "developer-button" : null,
-      lazy.ippEnabled ? "ipprotection-button" : null,
       "fxa-toolbar-menu-button",
       lazy.resetPBMToolbarButtonEnabled ? "reset-pbm-toolbar-button" : null,
     ].filter(name => name);

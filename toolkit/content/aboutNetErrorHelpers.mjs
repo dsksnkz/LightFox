@@ -39,10 +39,7 @@ export let gNoConnectivity =
 // the File menu. gOffline is true for both that case and when there's no
 // network connectivity.
 export let gOffline = gErrorCode === "netOffline" || gNoConnectivity;
-export const VPN_ACTIVE = RPMGetBoolPref(
-  "browser.ipProtection.userEnabled",
-  false
-);
+export const VPN_ACTIVE = false;
 
 export function isCaptive() {
   return searchParams.get("captive") == "true";

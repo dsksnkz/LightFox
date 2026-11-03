@@ -346,40 +346,8 @@ document.addEventListener(
         case "viewBookmarksSidebarKb":
           SidebarController.toggle("viewBookmarksSidebar");
           break;
-        case "viewOpenTabsSidebarKb":
-          SidebarController.toggle("viewOpenTabsSidebar");
-          break;
         case "viewBookmarksToolbarKb":
           BookmarkingUI.toggleBookmarksToolbar("shortcut");
-          break;
-        case "viewGenaiChatSidebarKb": {
-          const currentURI = window.gBrowser.selectedBrowser.currentURI;
-          const isSmartWindowFullPageMode =
-            AIWindow.isAIWindowContentPage(currentURI);
-          if (AIWindow.isAIWindowActive(window) && !isSmartWindowFullPageMode) {
-            lazy.AIWindowUI.toggleSidebar(window);
-            break;
-          }
-
-          const pref = "browser.ml.chat.enabled";
-          const enabled = Services.prefs.getBoolPref(pref);
-          Glean.genaiChatbot.keyboardShortcut.record({
-            enabled,
-            sidebar: SidebarController.currentID,
-          });
-          if (enabled) {
-            SidebarController.toggle("viewGenaiChatSidebar");
-          }
-          break;
-        }
-        case "toggleSidebarKb":
-          if (SIDEBAR_REVAMP_ENABLED) {
-            SidebarController.handleToolbarButtonClick();
-            Glean.sidebar.keyboardShortcut.record({
-              panel: SidebarController.currentID,
-              opened: SidebarController._state.launcherExpanded,
-            });
-          }
           break;
         case "key_gotoHistory":
           SidebarController.toggle("viewHistorySidebar");

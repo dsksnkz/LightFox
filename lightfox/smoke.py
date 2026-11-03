@@ -34,6 +34,7 @@ class Marionette:
         for _ in range(120):
             try:
                 self.sock = socket.create_connection(("127.0.0.1", port))
+                self.sock.settimeout(60)
                 break
             except OSError:
                 time.sleep(0.5)
