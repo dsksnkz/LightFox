@@ -6,7 +6,6 @@ DIRS += [
     "formautofill",
     "webcompat",
     "pictureinpicture",
-    "search-detection",
     "newtab",
 ]
 
