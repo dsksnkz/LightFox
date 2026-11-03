@@ -106,10 +106,7 @@ export const AboutNewTab = {
     this.toggleActivityStream(true);
     this.initialized = true;
 
-    Services.obs.addObserver(
-      this,
-      lazy.TelemetryReportingPolicy.TELEMETRY_TOU_ACCEPTED_OR_INELIGIBLE
-    );
+    this.onBrowserReady();
   },
 
   /**
@@ -285,10 +282,6 @@ export const AboutNewTab = {
     }
     try {
       Services.obs.removeObserver(this, TOPIC_APP_QUIT);
-      Services.obs.removeObserver(
-        this,
-        lazy.TelemetryReportingPolicy.TELEMETRY_TOU_ACCEPTED_OR_INELIGIBLE
-      );
     } catch (e) {
       // If init failed before registering these observers, removeObserver may throw.
       // Safe to ignore during shutdown.
@@ -348,16 +341,6 @@ export const AboutNewTab = {
     switch (topic) {
       case TOPIC_APP_QUIT: {
         this.uninit();
-        break;
-      }
-      case lazy.TelemetryReportingPolicy.TELEMETRY_TOU_ACCEPTED_OR_INELIGIBLE: {
-        Services.obs.removeObserver(
-          this,
-          lazy.TelemetryReportingPolicy.TELEMETRY_TOU_ACCEPTED_OR_INELIGIBLE
-        );
-
-        // Avoid running synchronously during this event that's used for timing
-        Services.tm.dispatchToMainThread(() => this.onBrowserReady());
         break;
       }
     }

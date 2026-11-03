@@ -3820,3 +3820,79 @@ pref("distribution.mozillaonline.ignore", true);
 #ifdef XP_MACOSX
   pref("browser.macAppMenu.setAsDefaultShown", false);
 #endif
+
+// LightFox: everything below overrides Firefox defaults set earlier in this file.
+pref("identity.fxaccounts.enabled", false);
+pref("identity.fxaccounts.toolbar.enabled", false);
+pref("services.sync.engine.tabs", false);
+pref("browser.urlbar.suggest.remotetab", false);
+pref("browser.preferences.experimental.hidden", true);
+pref("browser.preferences.moreFromMozilla", false);
+
+pref("app.normandy.enabled", false);
+pref("app.normandy.api_url", "");
+pref("app.shield.optoutstudies.enabled", false);
+pref("messaging-system.rsexperimentloader.enabled", false);
+pref("nimbus.rollouts.enabled", false);
+
+pref("datareporting.healthreport.uploadEnabled", false);
+pref("datareporting.policy.dataSubmissionEnabled", false);
+pref("datareporting.policy.firstRunURL", "");
+pref("toolkit.telemetry.enabled", false);
+pref("toolkit.telemetry.unified", false);
+pref("toolkit.telemetry.archive.enabled", false);
+pref("toolkit.telemetry.newProfilePing.enabled", false);
+pref("toolkit.telemetry.shutdownPingSender.enabled", false);
+pref("toolkit.telemetry.updatePing.enabled", false);
+pref("toolkit.telemetry.bhrPing.enabled", false);
+pref("toolkit.telemetry.firstShutdownPing.enabled", false);
+pref("toolkit.telemetry.server", "");
+pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
+pref("browser.tabs.crashReporting.sendReport", false);
+pref("breakpad.reportURL", "");
+pref("dap.ohttp.relayURL", "");
+
+pref("app.update.auto", false);
+pref("app.update.url", "");
+pref("browser.startup.homepage_override.mstone", "ignore");
+pref("startup.homepage_welcome_url", "");
+pref("startup.homepage_welcome_url.additional", "");
+pref("startup.homepage_override_url", "");
+
+pref("browser.region.network.url", "");
+pref("browser.region.update.enabled", false);
+pref("network.captive-portal-service.enabled", false);
+pref("network.connectivity-service.enabled", false);
+pref("captivedetect.canonicalURL", "");
+pref("doh-rollout.enabled", false);
+pref("doh-rollout.provider-list", "[]");
+pref("network.predictor.enabled", false);
+pref("network.prefetch-next", false);
+pref("network.http.speculative-parallel-limit", 0);
+pref("browser.urlbar.speculativeConnect.enabled", false);
+pref("browser.urlbar.quicksuggest.enabled", false);
+pref("browser.urlbar.merino.endpointURL", "");
+pref("browser.urlbar.merino.ohttpConfigURL", "");
+pref("browser.urlbar.merino.ohttpRelayURL", "");
+pref("browser.search.suggest.enabled.private", false);
+pref("extensions.getAddons.showPane", false);
+pref("extensions.htmlaboutaddons.recommendations.enabled", false);
+pref("browser.discovery.enabled", false);
+pref("extensions.pocket.enabled", false);
+pref("browser.uitour.enabled", false);
+pref("browser.vpn_promo.enabled", false);
+pref("browser.contentblocking.report.vpn.enabled", false);
+pref("browser.contentblocking.report.monitor.enabled", false);
+pref("browser.contentblocking.report.lockwise.enabled", false);
+pref("browser.contentblocking.report.mobile-ios.url", "");
+pref("browser.contentblocking.report.mobile-android.url", "");
+pref("browser.ping-centre.telemetry", false);
+pref("signon.firefoxRelay.feature", "unavailable");
+pref("signon.management.page.breach-alerts.enabled", false);
+pref("signon.management.page.vulnerable-passwords.enabled", false);
+pref("browser.topsites.contile.enabled", false);
+pref("browser.topsites.useRemoteSetting", false);
+pref("browser.aboutConfig.showWarning", false);
+pref("browser.shell.checkDefaultBrowser", false);
+pref("browser.tabs.firefox-view", false);
+pref("browser.tabs.firefox-view-next", false);

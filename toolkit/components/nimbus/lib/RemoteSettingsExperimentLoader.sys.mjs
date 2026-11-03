@@ -277,6 +277,7 @@ export class RemoteSettingsExperimentLoader {
    *                                    are updated.
    */
   async enable({ forceSync = false } = {}) {
+    return;
     if (!IS_MAIN_PROCESS) {
       throw new Error(
         "RemoteSettingsExperimentLoader.enable() can only be called from the main process"
@@ -408,6 +409,7 @@ export class RemoteSettingsExperimentLoader {
    *                 options.
    */
   async updateRecipes(trigger, options) {
+    return;
     // Prevent an update from starting if we're shutting down as it might not
     // complete in time and could result in partial state written to the
     // database or inconsistency between pref state and database state.

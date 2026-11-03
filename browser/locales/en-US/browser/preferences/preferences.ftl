@@ -1252,10 +1252,10 @@ containers-site-remove-button =
 ## Account and sync
 
 account-sync-section =
-    .heading = Account and sync
+    .heading = General
 
-pane-account-sync-title2 = Account and sync
-    .title = Account and sync
+pane-account-sync-title2 = General
+    .title = General
 
 sync-group-label =
     .label = Sync

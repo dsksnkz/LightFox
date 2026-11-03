@@ -370,7 +370,6 @@ var CustomizableUIInternal = {
       "spring",
       "downloads-button",
       AppConstants.MOZ_DEV_EDITION ? "developer-button" : null,
-      "fxa-toolbar-menu-button",
       lazy.resetPBMToolbarButtonEnabled ? "reset-pbm-toolbar-button" : null,
     ].filter(name => name);
 
@@ -626,7 +625,6 @@ var CustomizableUIInternal = {
         "preferences-button",
         // This widget no longer exists as of 2023, see Bug 1799009.
         "add-ons-button",
-        "sync-button",
       ];
 
       if (!AppConstants.MOZ_DEV_EDITION) {

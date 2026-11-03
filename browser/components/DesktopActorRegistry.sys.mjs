@@ -491,7 +491,6 @@ let JSWINDOWACTORS = {
       "about:home",
       "about:newtab",
       "about:welcome",
-      "chrome://browser/content/syncedtabs/sidebar.html",
       "chrome://browser/content/places/historySidebar.xhtml",
       "chrome://browser/content/places/bookmarksSidebar.xhtml",
       "about:firefoxview",
@@ -716,22 +715,6 @@ let JSWINDOWACTORS = {
       },
     },
     matches: ["https://*/*"],
-    safeForUntrustedWebProcess: true,
-  },
-
-  ShieldFrame: {
-    parent: {
-      esModuleURI: "resource://normandy-content/ShieldFrameParent.sys.mjs",
-    },
-    child: {
-      esModuleURI: "resource://normandy-content/ShieldFrameChild.sys.mjs",
-      events: {
-        pageshow: {},
-        pagehide: {},
-        ShieldPageEvent: { wantUntrusted: true },
-      },
-    },
-    matches: ["about:studies*"],
     safeForUntrustedWebProcess: true,
   },
 
