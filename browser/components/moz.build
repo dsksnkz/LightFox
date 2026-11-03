@@ -40,7 +40,6 @@ DIRS += [
     "extensions",
     "firefoxview",
     "genai",
-    "messagepreview",
     "migration",
     "mozcachedohttp",
     "multilineeditor",

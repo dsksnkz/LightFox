@@ -629,13 +629,6 @@ customElements.setElementCreationCallback("screenshots-buttons", () => {
   );
 });
 
-customElements.setElementCreationCallback("menu-message", () => {
-  ChromeUtils.importESModule(
-    "chrome://browser/content/asrouter/components/menu-message.mjs",
-    { global: "current" }
-  );
-});
-
 customElements.setElementCreationCallback("webrtc-preview", () => {
   ChromeUtils.importESModule(
     "chrome://browser/content/webrtc/webrtc-preview.mjs",

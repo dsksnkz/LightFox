@@ -688,7 +688,7 @@ export const PREFS_CONFIG = new Map([
     "showSponsored",
     {
       title: "User pref for sponsored Pocket content",
-      value: true,
+      value: false,
     },
   ],
   [
@@ -696,14 +696,14 @@ export const PREFS_CONFIG = new Map([
     {
       title: "System pref for sponsored Pocket content",
       // This pref is dynamic as the sponsored content depends on the region
-      getValue: showSpocs,
+      getValue: () => false,
     },
   ],
   [
     "showSponsoredTopSites",
     {
       title: "Show sponsored top sites",
-      value: true,
+      value: false,
     },
   ],
   [
@@ -802,7 +802,7 @@ export const PREFS_CONFIG = new Map([
     "unifiedAds.endpoint",
     {
       title: "Mozilla Ad Routing Service (MARS) unified ads API endpoint URL",
-      value: "https://ads.mozilla.org/",
+      value: "",
     },
   ],
   [
@@ -818,14 +818,14 @@ export const PREFS_CONFIG = new Map([
     {
       title: "system.showWeather",
       // pref is dynamic
-      getValue: showWeather,
+      getValue: () => false,
     },
   ],
   [
     "showWeather",
     {
       title: "showWeather",
-      value: true,
+      value: false,
     },
   ],
   [
@@ -992,7 +992,7 @@ export const PREFS_CONFIG = new Map([
     "telemetry",
     {
       title: "Enable system error and usage data collection",
-      value: true,
+      value: false,
       value_local_dev: false,
     },
   ],
@@ -1052,7 +1052,7 @@ export const PREFS_CONFIG = new Map([
     "feeds.section.topstories",
     {
       title: "Whether top stories are enabled by default.",
-      value: PREF_DEFAULT_VALUE_TOPSTORIES_ENABLED,
+      value: false,
     },
   ],
   [
@@ -2146,7 +2146,7 @@ export const PREFS_CONFIG = new Map([
       title:
         "Endpoint prefixes (comma-separated) that are allowed to be requested",
       value:
-        "https://getpocket.cdn.mozilla.net/,https://firefox-api-proxy.cdn.mozilla.net/,https://merino.services.mozilla.com/,https://ads.mozilla.org/",
+        "",
     },
   ],
   [

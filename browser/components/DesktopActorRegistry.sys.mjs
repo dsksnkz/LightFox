@@ -130,21 +130,6 @@ let JSWINDOWACTORS = {
     remoteTypes: ["privilegedabout"],
   },
 
-  AboutMessagePreview: {
-    parent: {
-      esModuleURI: "resource:///actors/AboutMessagePreviewParent.sys.mjs",
-    },
-    child: {
-      esModuleURI: "resource:///actors/AboutMessagePreviewChild.sys.mjs",
-      events: {
-        DOMDocElementInserted: { capture: true },
-      },
-    },
-    matches: ["about:messagepreview", "about:messagepreview?*"],
-    remoteTypes: ["privilegedabout"],
-    enablePreference:
-      "browser.newtabpage.activity-stream.asrouter.devtoolsEnabled",
-  },
 
   AboutPrivateBrowsing: {
     parent: {
@@ -211,25 +196,6 @@ let JSWINDOWACTORS = {
     remoteTypes: ["parent"],
   },
 
-  AboutWelcome: {
-    parent: {
-      esModuleURI: "resource:///actors/AboutWelcomeParent.sys.mjs",
-    },
-    child: {
-      esModuleURI: "resource:///actors/AboutWelcomeChild.sys.mjs",
-      events: {
-        // This is added so the actor instantiates immediately and makes
-        // methods available to the page js on load.
-        DOMDocElementInserted: {},
-      },
-    },
-    matches: ["about:welcome"],
-    remoteTypes: ["privilegedabout"],
-
-    // See Bug 1618306
-    // Remove this preference check when we turn on separate about:welcome for all users.
-    enablePreference: "browser.aboutwelcome.enabled",
-  },
 
 
 
@@ -786,27 +752,6 @@ let JSWINDOWACTORS = {
     safeForUntrustedWebProcess: true,
   },
 
-  ASRouter: {
-    parent: {
-      esModuleURI: "resource:///actors/ASRouterParent.sys.mjs",
-    },
-    child: {
-      esModuleURI: "resource:///actors/ASRouterChild.sys.mjs",
-      events: {
-        // This is added so the actor instantiates immediately and makes
-        // methods available to the page js on load.
-        DOMDocElementInserted: {},
-      },
-    },
-    matches: [
-      "about:asrouter*",
-      "about:welcome*",
-      "about:privatebrowsing*",
-      "about:newtab*",
-      "about:home*",
-    ],
-    remoteTypes: ["privilegedabout"],
-  },
 
   SwitchDocumentDirection: {
     child: {

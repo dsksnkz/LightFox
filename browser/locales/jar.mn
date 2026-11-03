@@ -10,7 +10,6 @@
 [localization] @AB_CD@.jar:
   preview/interventions.ftl                        (../components/urlbar/content/interventions.ftl)
   preview/enUS-searchFeatures.ftl                  (../components/urlbar/content/enUS-searchFeatures.ftl)
-  preview/onboarding.ftl                           (../components/aboutwelcome/content/onboarding.ftl)
   preview/credentialChooser.ftl                    (../../toolkit/components/credentialmanagement/credentialChooser.ftl)
   browser                                          (%browser/**/*.ftl)
   preview/aiWindow.ftl                             (../locales-preview/aiWindow.ftl)

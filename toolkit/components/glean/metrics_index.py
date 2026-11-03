@@ -81,6 +81,7 @@ gecko_metrics = [
     "toolkit/components/formautofill/metrics.yaml",
     "toolkit/components/gecko-trace/generated-metrics.yaml",
     "toolkit/components/glean/metrics.yaml",
+    "toolkit/components/ipprotection/metrics.yaml",
     "toolkit/components/mediasniffer/metrics.yaml",
     "toolkit/components/messaging-system/metrics.yaml",
     "toolkit/components/ml/metrics.yaml",
@@ -113,6 +114,7 @@ gecko_metrics = [
 # Order is lexicographical, enforced by t/c/glean/tests/pytest/test_yaml_indices.py
 firefox_desktop_metrics = [
     "browser/actors/metrics.yaml",
+    "browser/components/aiwindow/metrics.yaml",
     "browser/components/asrouter/metrics.yaml",
     "browser/components/attribution/metrics.yaml",
     "browser/components/backup/metrics.yaml",
@@ -122,6 +124,8 @@ firefox_desktop_metrics = [
     "browser/components/downloads/metrics.yaml",
     "browser/components/extensions/metrics.yaml",
     "browser/components/firefoxview/metrics.yaml",
+    "browser/components/genai/metrics.yaml",
+    "browser/components/ipprotection/metrics.yaml",
     "browser/components/metrics.yaml",
     "browser/components/migration/metrics.yaml",
     "browser/components/miniwindow/metrics.yaml",
@@ -137,6 +141,7 @@ firefox_desktop_metrics = [
     "browser/components/sessionstore/metrics.yaml",
     "browser/components/sharing/metrics.yaml",
     "browser/components/shell/metrics.yaml",
+    "browser/components/sidebar/metrics.yaml",
     "browser/components/tabbrowser/metrics.yaml",
     "browser/components/tabnotes/metrics.yaml",
     "browser/components/taskbartabs/metrics.yaml",

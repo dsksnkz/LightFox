@@ -1990,14 +1990,14 @@ pref("browser.newtabpage.activity-stream.mobileDownloadModal.variant-b", false);
 pref("browser.newtabpage.activity-stream.mobileDownloadModal.variant-c", false);
 
 // Mozilla Ad Routing Service (MARS) unified ads service
-pref("browser.newtabpage.activity-stream.unifiedAds.tiles.enabled", true);
-pref("browser.newtabpage.activity-stream.unifiedAds.spocs.enabled", true);
-pref("browser.newtabpage.activity-stream.unifiedAds.endpoint", "https://ads.mozilla.org/");
+pref("browser.newtabpage.activity-stream.unifiedAds.tiles.enabled", false);
+pref("browser.newtabpage.activity-stream.unifiedAds.spocs.enabled", false);
+pref("browser.newtabpage.activity-stream.unifiedAds.endpoint", "");
 pref("browser.newtabpage.activity-stream.unifiedAds.adsFeed.enabled", false);
-pref("browser.newtabpage.activity-stream.unifiedAds.ohttp.enabled", true);
+pref("browser.newtabpage.activity-stream.unifiedAds.ohttp.enabled", false);
 
 // Weather widget for newtab
-pref("browser.newtabpage.activity-stream.showWeather", true);
+pref("browser.newtabpage.activity-stream.showWeather", false);
 pref("browser.newtabpage.activity-stream.weather.query", "");
 pref("browser.newtabpage.activity-stream.weather.display", "detailed");
 
@@ -2103,7 +2103,7 @@ pref("messaging-system.askForFeedback", true);
 pref("browser.newtabpage.activity-stream.asrouter.useRemoteL10n", true);
 
 // These prefs control if Discovery Stream is enabled.
-pref("browser.newtabpage.activity-stream.discoverystream.enabled", true);
+pref("browser.newtabpage.activity-stream.discoverystream.enabled", false);
 pref("browser.newtabpage.activity-stream.discoverystream.hardcoded-basic-layout", false);
 pref("browser.newtabpage.activity-stream.discoverystream.hybridLayout.enabled", false);
 pref("browser.newtabpage.activity-stream.discoverystream.hideCardBackground.enabled", false);
@@ -2245,7 +2245,7 @@ pref("browser.newtabpage.trainhopAddon.xpiBaseURL", "https://archive.mozilla.org
 pref("browser.newtabpage.sponsor-protection.enabled", true);
 
 // Separate about welcome
-pref("browser.aboutwelcome.enabled", true);
+pref("browser.aboutwelcome.enabled", false);
 // Used to set multistage welcome UX
 pref("browser.aboutwelcome.screens", "");
 // Whether to gate loading about:welcome on Nimbus experiments having loaded.
