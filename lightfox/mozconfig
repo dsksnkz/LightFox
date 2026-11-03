@@ -15,7 +15,6 @@ ac_add_options --disable-profiling
 ac_add_options --disable-debug-symbols
 ac_add_options --enable-strip
 ac_add_options --disable-backgroundtasks
-ac_add_options --disable-webspeech
 ac_add_options --disable-parental-controls
 ac_add_options --disable-necko-wifi
 mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/obj-lightfox
