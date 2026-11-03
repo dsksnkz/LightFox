@@ -1,5 +1,6 @@
 # Full LightFox build. Use: MOZCONFIG=$PWD/lightfox/mozconfig ./mach build
 ac_add_options --enable-application=browser
+ac_add_options --enable-bootstrap
 ac_add_options --enable-release
 ac_add_options --with-branding=browser/branding/lightfox
 ac_add_options --with-app-name=lightfox
