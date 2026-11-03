@@ -3896,3 +3896,11 @@ pref("browser.aboutConfig.showWarning", false);
 pref("browser.shell.checkDefaultBrowser", false);
 pref("browser.tabs.firefox-view", false);
 pref("browser.tabs.firefox-view-next", false);
+
+pref("dom.ipc.processCount", 2);
+pref("browser.newtab.preload", false);
+pref("browser.sessionhistory.max_total_viewers", 0);
+pref("browser.cache.memory.capacity", 32768);
+pref("browser.tabs.unloadOnLowMemory", true);
+pref("media.memory_cache_max_size", 16384);
+pref("image.mem.surfacecache.max_size_kb", 102400);
