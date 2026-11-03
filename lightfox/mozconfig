@@ -1,0 +1,15 @@
+# Full LightFox build. Use: MOZCONFIG=$PWD/lightfox/mozconfig ./mach build
+ac_add_options --enable-application=browser
+ac_add_options --enable-release
+ac_add_options --with-branding=browser/branding/lightfox
+ac_add_options --with-app-name=lightfox
+ac_add_options --with-app-basename=LightFox
+ac_add_options --disable-tests
+ac_add_options --disable-debug
+ac_add_options --disable-crashreporter
+ac_add_options --disable-updater
+ac_add_options --disable-default-browser-agent
+ac_add_options --disable-geckodriver
+ac_add_options --disable-profiling
+mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/obj-lightfox
+mk_add_options MOZ_MAKE_FLAGS=-j8

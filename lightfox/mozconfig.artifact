@@ -1,0 +1,5 @@
+# Fast front-end build on Mozilla's prebuilt engine.
+ac_add_options --enable-artifact-builds
+ac_add_options --disable-tests
+ac_add_options --with-branding=browser/branding/lightfox
+mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/obj-artifact
