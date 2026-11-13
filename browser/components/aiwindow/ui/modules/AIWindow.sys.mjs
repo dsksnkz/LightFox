@@ -25,7 +25,7 @@ export const AIWindow = {
   shouldUseImmersiveView: no,
   hasActiveAIWindows: no,
   hasActiveChatInBrowser: no,
-  handleAIWindowOptions: no,
+  handleAIWindowOptions: ({ args = null } = {}) => args,
   init: noop,
   uninit: noop,
   launchWindow: noop,
